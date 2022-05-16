@@ -22,6 +22,6 @@ module.exports = class Users extends Model {
     });
   }
   static associate(models) {
-    this.belongsToMany(models.Meals, {through: models.JoinUserAndMeals, foreignKey: 'mealsId'});
+    this.belongsToMany(models.Meals, {through: models.JoinUserAndMeals, foreignKey: 'userId'});
   }
 }
