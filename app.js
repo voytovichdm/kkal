@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParsec = require('body-parser')
-const catogoryRoutes = require('./routes/create')
+const createRoutes = require('./routes/create')
 const app = express()
 
 app.use(require('morgan')('dev'))
@@ -9,6 +9,7 @@ app.use(require('cors')())
 app.use(bodyParsec.urlencoded({extended: true}))
 app.use(bodyParsec.json())
 
-app.use('/', catogoryRoutes)
+app.use('/', createRoutes)
 
 module.exports = app
+
