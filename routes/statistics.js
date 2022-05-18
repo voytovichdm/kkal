@@ -2,7 +2,7 @@ const express = require('express')
 const model = require('../models')
 const { Op } = require('sequelize');
 const router = express.Router()
-// .gitignore fixx
+
 router.post('/statistics',
     async (req, res) => {
     try {
