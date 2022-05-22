@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs');
+const csv = require('csv-parser');
 const model = require('../models');
 
 const router = express.Router();
@@ -20,11 +22,9 @@ router.post('/add/meal',
         information.carbohydrates_f = information.carbohydrates_f / 100 * req.body.grams,
         information.carbohydrates_s = information.carbohydrates_s / 100 * req.body.grams,
         information.calories = information.calories / 100 * req.body.grams;
-      } else {
-        res.status(404).json({
-          message: 'Not found',
-        });
       }
+
+      if (!information) res.status(404).json({ message: 'Not found' });
 
       const meal = await model.Meals.create({
         name: information.name,
@@ -47,6 +47,23 @@ router.post('/add/meal',
       });
     } catch (err) {
       console.log(err.message);
+    }
+  });
+
+router.post('/add/meal-csv',
+  async (req, res) => {
+    try {
+      const results = [];
+      fs.createReadStream('files/upload/meal.csv')
+        .pipe(csv())
+        .on('data', (data) => results.push(data))
+        .on('end', () => {
+          console.log(results);
+        });
+
+      res.status(200).json({ message: 'Read' });
+    } catch (err) {
+      console.log(err);
     }
   });
 
