@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParsec = require('body-parser');
-const createRoutes = require('./routes/create');
-const authRoutes = require('./routes/auth');
-const mealRoutes = require('./routes/addMeals');
-const statisticsRoutes = require('./routes/statistics');
-const uploadRoutes = require('./routes/upload');
+const passport = require('passport')
+const createUserRouth = require('./routes/create_user')
+const createFoodRouth = require('./routes/create_food')
+const addMealsRouth = require('./routes/add_meals')
+const getStatisticsRouth = require("./routes/get_statistics");
 
 const app = express();
 
@@ -14,10 +14,16 @@ app.use(require('cors')());
 app.use(bodyParsec.urlencoded({ extended: true }));
 app.use(bodyParsec.json());
 
-app.use('/auth', authRoutes);
-app.use('/', createRoutes);
-app.use('/', mealRoutes);
-app.use('/', statisticsRoutes);
-app.use('/', uploadRoutes);
+app.use(passport.initialize())
+require('./middleware/passport')(passport)
+
+app.use('/', createUserRouth);
+app.use('/', createFoodRouth);
+app.use('/', addMealsRouth);
+app.use('/', getStatisticsRouth);
+
+app.use((error, req, res, next) => {
+    res.status(500).json({ message: error.message });
+});
 
 module.exports = app;

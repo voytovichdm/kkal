@@ -1,11 +1,8 @@
-const express = require('express')
 const model = require('../models')
-const router = express.Router()
 
-router.post('/create',
-    async (req, res) => {
+module.exports.createFood = async (req, res, next) => {
     try {
-        await model.Foods.create({
+        const food = await model.Foods.create({
             name: req.body.name,
             protein_a: req.body.protein_a,
             protein_v: req.body.protein_v,
@@ -15,12 +12,8 @@ router.post('/create',
             carbohydrates_s: req.body.carbohydrates_s,
             calories: req.body.calories
         })
-        res.status(200).json({
-            message: 'Сохранено'
-        })
+        res.status(200).json(food)
     } catch (err) {
-        console.log(err.message)
+        next(err);
     }
-})
-
-module.exports = router
+}

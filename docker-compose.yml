@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  backend:
+    build: ./
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    volumes:
+      - /app/node_modules
+      - ./:/app
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: time_db
+      MYSQL_HOST: mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:

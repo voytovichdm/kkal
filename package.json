@@ -2,12 +2,24 @@
   "name": "kkal",
   "version": "1.0.0",
   "description": "nodejs, express",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all",
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voytovichdm/kkal.git"
   },
   "author": "Voitovych Dmytro",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voytovichdm/kkal/issues"
+  },
+  "homepage": "https://github.com/voytovichdm/kkal#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
@@ -15,20 +27,22 @@
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
     "express": "^4.18.1",
+    "jest": "^28.1.2",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "morgan": "^1.10.0",
-    "multer": "^1.4.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^2.3.3",
+    "node-mocks-http": "^1.11.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
     "pg": "^8.7.3",
-    "sequelize": "^6.19.0"
+    "pm2": "^5.2.0",
+    "sequelize": "^6.21.3",
+    "sequelize-cli": "^6.4.1",
+    "supertest": "^6.2.4"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-mocha": "^6.3.0",
-    "eslint-plugin-node": "^11.1.0",
-    "nodemon": "^2.0.16",
-    "sequelize-cli": "^6.4.1"
+    "nodemon": "^2.0.19"
   }
 }

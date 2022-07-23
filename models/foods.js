@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-
+// npx sequelize-cli model:generate --name Foods --attributes name:string,protein_a:double,protein_v:double,fats_a:double,fats_v:double,carbohydrates_f:double,carbohydrates_s:double,calories:double
 module.exports = class Foods extends Model {
   static init(sequelize, DataTypes) {
     return super.init({
